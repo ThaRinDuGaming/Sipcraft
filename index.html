@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SIPCRAFT</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body, html {
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #ff70a6, #a3d5ff, #003366);
+      color: white;
+      overflow: hidden;
+    }
+    .loading-screen {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: fadeOut 2s ease forwards;
+      animation-delay: 2s;
+      z-index: 10;
+    }
+    .loading-screen h1 {
+      font-size: 3rem;
+      animation: pulse 2s infinite;
+    }
+    .loading-screen p {
+      margin-top: 1rem;
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+      animation-delay: 2.5s;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    .brand {
+      font-size: 4rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    .tagline {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .buttons a {
+      background: white;
+      color: #003366;
+      text-decoration: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: transform 0.2s, background 0.3s;
+    }
+    .buttons a:hover {
+      transform: scale(1.05);
+      background: #ffb6c1;
+    }
+    footer {
+      position: absolute;
+      bottom: 1rem;
+      text-align: center;
+      width: 100%;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+    @media (max-width: 600px) {
+      .brand { font-size: 2.5rem; }
+      .tagline { font-size: 1.2rem; text-align: center; padding: 0 1rem; }
+      .buttons { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="loading-screen">
+    <h1>SIPCRAFT</h1>
+    <p>Loading...</p>
+  </div>
+
+  <div class="main-content">
+    <div class="brand">SIPCRAFT</div>
+    <div class="tagline">Your dream mug, just a click away!</div>
+    <div class="buttons">
+      <a href="https://www.facebook.com/share/16izywvgUJ/">Facebook</a>
+      <a href="https://wa.me/94753734410">WhatsApp</a>
+      <a href="https://www.instagram.com/sipcraft4?igsh=eGlvOGhpZ3pzNjEy">Instagram</a>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 SIPCRAFT. All rights reserved.
+  </footer>
+
+</body>
+</html>
