@@ -5,11 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SIPCRAFT</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body, html {
       height: 100%;
       font-family: 'Segoe UI', sans-serif;
@@ -30,10 +26,7 @@
       animation-delay: 2s;
       z-index: 10;
     }
-    .loading-screen h1 {
-      font-size: 3rem;
-      animation: pulse 2s infinite;
-    }
+    .loading-screen h1 { font-size: 3rem; animation: pulse 2s infinite; }
     .loading-screen p {
       margin-top: 1rem;
       font-size: 1rem;
@@ -43,9 +36,8 @@
       0%, 100% { opacity: 1; }
       50% { opacity: 0.5; }
     }
-    @keyframes fadeOut {
-      to { opacity: 0; visibility: hidden; }
-    }
+    @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
+
     .main-content {
       display: flex;
       flex-direction: column;
@@ -56,18 +48,11 @@
       animation: fadeIn 2s ease forwards;
       animation-delay: 2.5s;
     }
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-    .brand {
-      font-size: 4rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
-    }
-    .tagline {
-      font-size: 1.5rem;
-      margin-bottom: 2rem;
-    }
+    @keyframes fadeIn { to { opacity: 1; } }
+
+    .brand { font-size: 4rem; font-weight: bold; margin-bottom: 1rem; }
+    .tagline { font-size: 1.5rem; margin-bottom: 2rem; }
+
     .buttons {
       display: flex;
       gap: 1rem;
@@ -87,6 +72,7 @@
       transform: scale(1.05);
       background: #ffb6c1;
     }
+
     footer {
       position: absolute;
       bottom: 1rem;
@@ -95,6 +81,66 @@
       font-size: 0.9rem;
       opacity: 0.8;
     }
+
+    /* Mug icon button */
+    .top-left-button {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: white;
+      color: #003366;
+      border-radius: 50%;
+      padding: 0.5rem;
+      cursor: pointer;
+      font-size: 1.5rem;
+      z-index: 20;
+    }
+
+    /* Popup form */
+    .form-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      color: black;
+      padding: 2rem;
+      border-radius: 15px;
+      z-index: 100;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+
+    .form-popup input, .form-popup textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .form-popup input[type="submit"] {
+      background: #003366;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .form-popup input[type="submit"]:hover {
+      background: #0055aa;
+    }
+
+    .form-popup .close {
+      position: absolute;
+      top: 0.5rem;
+      right: 1rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: red;
+    }
+
     @media (max-width: 600px) {
       .brand { font-size: 2.5rem; }
       .tagline { font-size: 1.2rem; text-align: center; padding: 0 1rem; }
@@ -103,11 +149,34 @@
   </style>
 </head>
 <body>
+  <!-- Loading screen -->
   <div class="loading-screen">
     <h1>SIPCRAFT</h1>
     <p>Loading...</p>
   </div>
 
+  <!-- Top-left mug icon -->
+  <div class="top-left-button" onclick="toggleForm()">☕</div>
+
+  <!-- Form Popup -->
+  <div class="form-popup" id="mugForm">
+    <span class="close" onclick="toggleForm()">×</span>
+    <form action="send_email.php" method="POST" enctype="multipart/form-data">
+      <label>Name:</label>
+      <input type="text" name="name" required />
+      <label>Contact Number:</label>
+      <input type="text" name="contact" required />
+      <label>Email Address:</label>
+      <input type="email" name="email" required />
+      <label>Message / Mug Details:</label>
+      <textarea name="message" rows="4" required></textarea>
+      <label>Upload Your Artwork:</label>
+      <input type="file" name="artwork" accept="image/*,.pdf" required />
+      <input type="submit" value="Send Order" />
+    </form>
+  </div>
+
+  <!-- Main content -->
   <div class="main-content">
     <div class="brand">SIPCRAFT</div>
     <div class="tagline">Your dream mug, just a click away!</div>
@@ -118,9 +187,13 @@
     </div>
   </div>
 
-  <footer>
-    © 2025 SIPCRAFT. All rights reserved.
-  </footer>
+  <footer>© 2025 SIPCRAFT. All rights reserved.</footer>
 
+  <script>
+    function toggleForm() {
+      const form = document.getElementById("mugForm");
+      form.style.display = (form.style.display === "block") ? "none" : "block";
+    }
+  </script>
 </body>
 </html>
