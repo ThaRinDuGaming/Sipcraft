@@ -5,7 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SIPCRAFT</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body, html {
       height: 100%;
       font-family: 'Segoe UI', sans-serif;
@@ -26,7 +30,10 @@
       animation-delay: 2s;
       z-index: 10;
     }
-    .loading-screen h1 { font-size: 3rem; animation: pulse 2s infinite; }
+    .loading-screen h1 {
+      font-size: 3rem;
+      animation: pulse 2s infinite;
+    }
     .loading-screen p {
       margin-top: 1rem;
       font-size: 1rem;
@@ -36,8 +43,9 @@
       0%, 100% { opacity: 1; }
       50% { opacity: 0.5; }
     }
-    @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
-
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
     .main-content {
       display: flex;
       flex-direction: column;
@@ -47,12 +55,21 @@
       opacity: 0;
       animation: fadeIn 2s ease forwards;
       animation-delay: 2.5s;
+      position: relative;
+      text-align: center;
     }
-    @keyframes fadeIn { to { opacity: 1; } }
-
-    .brand { font-size: 4rem; font-weight: bold; margin-bottom: 1rem; }
-    .tagline { font-size: 1.5rem; margin-bottom: 2rem; }
-
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    .brand {
+      font-size: 4rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    .tagline {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+    }
     .buttons {
       display: flex;
       gap: 1rem;
@@ -73,30 +90,24 @@
       background: #ffb6c1;
     }
 
-    footer {
+    .form-button {
       position: absolute;
-      bottom: 1rem;
-      text-align: center;
-      width: 100%;
-      font-size: 0.9rem;
-      opacity: 0.8;
-    }
-
-    /* Mug icon button */
-    .top-left-button {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
+      top: 20px;
+      left: 20px;
       background: white;
-      color: #003366;
+      border: none;
       border-radius: 50%;
-      padding: 0.5rem;
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
       cursor: pointer;
-      font-size: 1.5rem;
-      z-index: 20;
+      color: #003366;
+      transition: background 0.3s;
+    }
+    .form-button:hover {
+      background: #ffb6c1;
     }
 
-    /* Popup form */
     .form-popup {
       display: none;
       position: fixed;
@@ -107,95 +118,91 @@
       color: black;
       padding: 2rem;
       border-radius: 15px;
-      z-index: 100;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      z-index: 20;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
     }
-
-    .form-popup input, .form-popup textarea {
-      width: 100%;
-      padding: 0.5rem;
+    .form-popup h2 {
       margin-bottom: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
     }
-
-    .form-popup input[type="submit"] {
+    .form-popup input,
+    .form-popup textarea {
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .form-popup button {
       background: #003366;
       color: white;
+      padding: 0.5rem 1rem;
       border: none;
+      border-radius: 8px;
       cursor: pointer;
     }
-
-    .form-popup input[type="submit"]:hover {
-      background: #0055aa;
+    .form-popup button:hover {
+      background: #ff70a6;
     }
 
-    .form-popup .close {
+    footer {
       position: absolute;
-      top: 0.5rem;
-      right: 1rem;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: red;
+      bottom: 1rem;
+      text-align: center;
+      width: 100%;
+      font-size: 0.9rem;
+      opacity: 0.8;
     }
-
     @media (max-width: 600px) {
       .brand { font-size: 2.5rem; }
-      .tagline { font-size: 1.2rem; text-align: center; padding: 0 1rem; }
+      .tagline { font-size: 1.2rem; padding: 0 1rem; }
       .buttons { flex-direction: column; }
+      .form-popup {
+        width: 90%;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Loading screen -->
+
+  <!-- Loading Screen -->
   <div class="loading-screen">
     <h1>SIPCRAFT</h1>
     <p>Loading...</p>
   </div>
 
-  <!-- Top-left mug icon -->
-  <div class="top-left-button" onclick="toggleForm()">☕</div>
-
-  <!-- Form Popup -->
-  
-  
-  <div class="form-popup" id="mugForm">
-    <span class="close" onclick="toggleForm()">×</span>
-    <form action="https://formspree.io/f/mqabalvv" method="POST" enctype="multipart/form-data">
-      <label>Name:</label>
-      <input type="text" name="name" required />
-      <label>Contact Number:</label>
-      <input type="text" name="contact" required />
-      <label>Email Address:</label>
-      <input type="email" name="email" required />
-      <label>Message / Mug Details:</label>
-      <textarea name="message" rows="4" required></textarea>
-      <label>Upload Your Artwork:</label>
-      <input type="file" name="artwork" accept="image/*,.pdf" required />
-      <input type="submit" value="Send Order" />
-    </form>
-  </div>
-
-  <!-- Main content -->
+  <!-- Main Content -->
   <div class="main-content">
+    <!-- Mug Icon Button -->
+    <button class="form-button" onclick="document.querySelector('.form-popup').style.display='block'">☕</button>
+
     <div class="brand">SIPCRAFT</div>
     <div class="tagline">Your dream mug, just a click away!</div>
     <div class="buttons">
-      <a href="https://www.facebook.com/share/16izywvgUJ/">Facebook</a>
-      <a href="https://wa.me/94753734410">WhatsApp</a>
-      <a href="https://www.instagram.com/sipcraft4?igsh=eGlvOGhpZ3pzNjEy">Instagram</a>
+      <a href="https://www.facebook.com/share/16gLffTsPJ/" target="_blank">Facebook</a>
+      <a href="https://wa.me/94753734410" target="_blank">WhatsApp</a>
+      <a href="https://www.instagram.com/sipcraft4" target="_blank">Instagram</a>
     </div>
   </div>
 
-  <footer>© 2025 SIPCRAFT. All rights reserved.</footer>
+  <!-- Form Popup -->
+  <div class="form-popup">
+    <h2>Order Your Mug</h2>
+    <form action="https://formspree.io/f/mqabalvv" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <input type="text" name="contact" placeholder="Phone Number" required>
+      <textarea name="message" placeholder="Describe your mug (character, name, etc)" required></textarea>
+      <input type="file" name="attachment" accept="image/*">
+      <button type="submit">Send Order</button>
+    </form>
+    <br>
+    <button onclick="document.querySelector('.form-popup').style.display='none'">Close</button>
+  </div>
 
-  <script>
-    function toggleForm() {
-      const form = document.getElementById("mugForm");
-      form.style.display = (form.style.display === "block") ? "none" : "block";
-    }
-  </script>
+  <!-- Footer -->
+  <footer>
+    © 2025 SIPCRAFT. All rights reserved.
+  </footer>
+
 </body>
 </html>
